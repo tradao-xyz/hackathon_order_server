@@ -1,6 +1,5 @@
-import { LocalAccountSigner } from "@alchemy/aa-core";
 import type { NextRequest } from "next/server";
-import { generatePrivateKey } from "viem/accounts";
+import { projectId } from "../../utils/sessionkey";
 
 // ------------------
 // Using Crypto with Edge Middleware and Edge Functions
@@ -16,8 +15,6 @@ export default async function getUserInfo(request: NextRequest) {
 
   const plainText = "Hello 3333!";
 
-  const [pubKey, privateKey] = await createKeyPair();
-
   return new Response(
     JSON.stringify({
       // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID
@@ -26,18 +23,8 @@ export default async function getUserInfo(request: NextRequest) {
       randomValues: crypto.getRandomValues(new Uint32Array(10)),
       plainText,
       fromMiddleware,
-      // pubKey,
-      // privateKey,
+      projectId,
     }),
     { headers: { "Content-Type": "application/json" } }
   );
-}
-
-async function createKeyPair() {
-  const sessionPrivateKey = generatePrivateKey();
-  const sessionKey =
-    LocalAccountSigner.privateKeyToAccountSigner(sessionPrivateKey);
-  const sessionPublicKey = await sessionKey.getAddress();
-
-  return [sessionPrivateKey, sessionPublicKey];
 }

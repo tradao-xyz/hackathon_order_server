@@ -1,4 +1,3 @@
-import type { NextRequest } from "next/server";
 import { LocalAccountSigner } from "@alchemy/aa-core";
 import { generatePrivateKey } from "viem/accounts";
 import {
@@ -19,11 +18,7 @@ import {
 // Using Crypto with Edge Middleware and Edge Functions
 // ------------------
 
-export const config = {
-  runtime: "edge",
-};
-
-const projectId = "0864346d-c650-4383-830b-35bdfd2fa5be";
+export const projectId = "0864346d-c650-4383-830b-35bdfd2fa5be";
 
 const gmxv2ExchangeRouterAddress = "0x7C68C7866A64FA2160F78EEaE12217FFbf871fa8";
 
@@ -36,28 +31,7 @@ const contractABI = parseAbi([
   "function balanceOf(address owner) external view returns (uint256 balance)",
 ]);
 
-export default async function createSessionKey(request: NextRequest) {
-  const url = request.nextUrl;
-  const fromMiddleware = url.searchParams.get("token") ?? "unset";
-
-  const plainText = "Hello createSessionKey 111!";
-  const password = "hunter2";
-
-  return new Response(
-    JSON.stringify({
-      // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID
-      uuid: crypto.randomUUID(),
-      // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
-      randomValues: crypto.getRandomValues(new Uint32Array(10)),
-      plainText,
-      password,
-      fromMiddleware,
-    }),
-    { headers: { "Content-Type": "application/json" } }
-  );
-}
-
-async function sendUO(sessionKeyProvider: SessionKeyProvider) {
+export async function sendUO(sessionKeyProvider: SessionKeyProvider) {
   const { hash } = await sessionKeyProvider.sendUserOperation({
     target: gmxv2ExchangeRouterAddress,
     data: encodeFunctionData({
@@ -70,7 +44,7 @@ async function sendUO(sessionKeyProvider: SessionKeyProvider) {
   await sessionKeyProvider.waitForUserOperationTransaction(hash as Hex);
 }
 
-async function reconstructSessionKeyProvider(serializedSessionKey: Hex) {
+export async function reconstructSessionKeyProvider(serializedSessionKey: Hex) {
   const sessionKeyParams = {
     ...SessionKeyProvider.deserializeSessionKeyParams(serializedSessionKey),
     sessionPrivateKey,
