@@ -3,10 +3,10 @@ lockfileVersion: '6.0'
 dependencies:
   '@alchemy/aa-core':
     specifier: ^0.1.0
-    version: 0.1.0(typescript@4.7.4)
+    version: 0.1.0(typescript@5.2.2)
   '@zerodev/sdk':
     specifier: ^4.0.29
-    version: 4.0.29(typescript@4.7.4)
+    version: 4.0.29(typescript@5.2.2)
   next:
     specifier: canary
     version: 13.5.5-canary.11(react-dom@18.2.0)(react@18.2.0)
@@ -18,7 +18,7 @@ dependencies:
     version: 18.2.0(react@18.2.0)
   viem:
     specifier: ^1.16.4
-    version: 1.16.4(typescript@4.7.4)
+    version: 1.16.4(typescript@5.2.2)
 
 devDependencies:
   '@types/node':
@@ -32,13 +32,13 @@ devDependencies:
     version: 8.36.0
   eslint-config-next:
     specifier: canary
-    version: 13.5.5-canary.11(eslint@8.36.0)(typescript@4.7.4)
+    version: 13.5.5-canary.11(eslint@8.36.0)(typescript@5.2.2)
   turbo:
     specifier: ^1.8.5
     version: 1.8.5
   typescript:
-    specifier: 4.7.4
-    version: 4.7.4
+    specifier: ^5.2.2
+    version: 5.2.2
 
 packages:
 
@@ -46,12 +46,12 @@ packages:
     resolution: {integrity: sha512-UK0bHA7hh9cR39V+4gl2/NnBBjoXIxkuWAPCaY4X7fbH4L/azIi7ilWOCjMUYfpJgraLUAqkRi2BqrjME8Rynw==}
     dev: false
 
-  /@alchemy/aa-core@0.1.0(typescript@4.7.4):
+  /@alchemy/aa-core@0.1.0(typescript@5.2.2):
     resolution: {integrity: sha512-LZeadxy9hgXdnvpXZ5DC0qD8PsCvxLtw5P3+2bIAeOJ9lEzM0kWPQSR7to+XHwe8FcmtOZCgOdvF6vpJtOnmNg==}
     dependencies:
-      abitype: 0.8.11(typescript@4.7.4)
+      abitype: 0.8.11(typescript@5.2.2)
       eventemitter3: 5.0.1
-      viem: 1.16.4(typescript@4.7.4)
+      viem: 1.16.4(typescript@5.2.2)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -59,12 +59,12 @@ packages:
       - zod
     dev: false
 
-  /@alchemy/aa-core@0.1.0-alpha.23(typescript@4.7.4):
+  /@alchemy/aa-core@0.1.0-alpha.23(typescript@5.2.2):
     resolution: {integrity: sha512-3SUhiVUUuQhSjJlXgm37+Po1BZJ+YtEOuMGUt4se9Es2XeSUGkcJZfSppaodikPAe13597V+KyCrOysQDEYWGw==}
     dependencies:
-      abitype: 0.8.11(typescript@4.7.4)
+      abitype: 0.8.11(typescript@5.2.2)
       eventemitter3: 5.0.1
-      viem: 1.16.4(typescript@4.7.4)
+      viem: 1.16.4(typescript@5.2.2)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -72,12 +72,12 @@ packages:
       - zod
     dev: false
 
-  /@alchemy/aa-ethers@0.1.0-alpha.23(@alchemy/aa-core@0.1.0-alpha.23)(typescript@4.7.4):
+  /@alchemy/aa-ethers@0.1.0-alpha.23(@alchemy/aa-core@0.1.0-alpha.23)(typescript@5.2.2):
     resolution: {integrity: sha512-Sc+h6nqw46poyGHHhd2L1pwb0Ax0/uSPAd7er0wdrhZSOz2y7Fo0SWfqqRNW52uh/g2Aidvt2f/p2L9Q9egUbg==}
     peerDependencies:
       '@alchemy/aa-core': ^0.1.0-alpha.1
     dependencies:
-      '@alchemy/aa-core': 0.1.0-alpha.23(typescript@4.7.4)
+      '@alchemy/aa-core': 0.1.0-alpha.23(typescript@5.2.2)
       '@ethersproject/abi': 5.7.0
       '@ethersproject/abstract-signer': 5.7.0
       '@ethersproject/bytes': 5.7.0
@@ -86,7 +86,7 @@ packages:
       '@ethersproject/keccak256': 5.7.0
       '@ethersproject/providers': 5.7.2
       '@ethersproject/wallet': 5.7.0
-      viem: 1.16.4(typescript@4.7.4)
+      viem: 1.16.4(typescript@5.2.2)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -676,7 +676,7 @@ packages:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
     dev: true
 
-  /@typescript-eslint/parser@5.56.0(eslint@8.36.0)(typescript@4.7.4):
+  /@typescript-eslint/parser@5.56.0(eslint@8.36.0)(typescript@5.2.2):
     resolution: {integrity: sha512-sn1OZmBxUsgxMmR8a8U5QM/Wl+tyqlH//jTqCg8daTAmhAk26L2PFhcqPLlYBhYUJMZJK276qLXlHN3a83o2cg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -688,10 +688,10 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 5.56.0
       '@typescript-eslint/types': 5.56.0
-      '@typescript-eslint/typescript-estree': 5.56.0(typescript@4.7.4)
+      '@typescript-eslint/typescript-estree': 5.56.0(typescript@5.2.2)
       debug: 4.3.4
       eslint: 8.36.0
-      typescript: 4.7.4
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -709,7 +709,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree@5.56.0(typescript@4.7.4):
+  /@typescript-eslint/typescript-estree@5.56.0(typescript@5.2.2):
     resolution: {integrity: sha512-41CH/GncsLXOJi0jb74SnC7jVPWeVJ0pxQj8bOjH1h2O26jXN3YHKDT1ejkVz5YeTEQPeLCCRY0U2r68tfNOcg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -724,8 +724,8 @@ packages:
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.3.8
-      tsutils: 3.21.0(typescript@4.7.4)
-      typescript: 4.7.4
+      tsutils: 3.21.0(typescript@5.2.2)
+      typescript: 5.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -738,14 +738,14 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@zerodev/sdk@4.0.29(typescript@4.7.4):
+  /@zerodev/sdk@4.0.29(typescript@5.2.2):
     resolution: {integrity: sha512-RZ6J91Dza87xc3/2iF5mlau8/fDZ/wPZ385F0dvB2TmN7PjvOz0+XtePkKnQDpCTJCdoFy0XBh6LGkmlemSNmw==}
     dependencies:
-      '@alchemy/aa-core': 0.1.0-alpha.23(typescript@4.7.4)
-      '@alchemy/aa-ethers': 0.1.0-alpha.23(@alchemy/aa-core@0.1.0-alpha.23)(typescript@4.7.4)
+      '@alchemy/aa-core': 0.1.0-alpha.23(typescript@5.2.2)
+      '@alchemy/aa-ethers': 0.1.0-alpha.23(@alchemy/aa-core@0.1.0-alpha.23)(typescript@5.2.2)
       axios: 1.5.1
       merkletreejs: 0.3.10
-      viem: 1.16.4(typescript@4.7.4)
+      viem: 1.16.4(typescript@5.2.2)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -754,7 +754,7 @@ packages:
       - zod
     dev: false
 
-  /abitype@0.8.11(typescript@4.7.4):
+  /abitype@0.8.11(typescript@5.2.2):
     resolution: {integrity: sha512-bM4v2dKvX08sZ9IU38IN5BKmN+ZkOSd2oI4a9f0ejHYZQYV6cDr7j+d95ga0z2XHG36Y4jzoG5Z7qDqxp7fi/A==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -763,10 +763,10 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 4.7.4
+      typescript: 5.2.2
     dev: false
 
-  /abitype@0.9.8(typescript@4.7.4):
+  /abitype@0.9.8(typescript@5.2.2):
     resolution: {integrity: sha512-puLifILdm+8sjyss4S+fsUN09obiT1g2YW6CtcQF+QDzxR0euzgEB29MZujC6zMk2a6SVmtttq1fc6+YFA7WYQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -777,7 +777,7 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 4.7.4
+      typescript: 5.2.2
     dev: false
 
   /acorn-jsx@5.3.2(acorn@8.8.2):
@@ -1299,7 +1299,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-config-next@13.5.5-canary.11(eslint@8.36.0)(typescript@4.7.4):
+  /eslint-config-next@13.5.5-canary.11(eslint@8.36.0)(typescript@5.2.2):
     resolution: {integrity: sha512-uWz3csmdiEY4pu4DhOPp3CQf+3H1po/u7w0sMLdEEookiYQ7HJaRLbsFlRs0ITNuaesFriILNCYKs7rbcej1UQ==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
@@ -1310,7 +1310,7 @@ packages:
     dependencies:
       '@next/eslint-plugin-next': 13.5.5-canary.11
       '@rushstack/eslint-patch': 1.5.1
-      '@typescript-eslint/parser': 5.56.0(eslint@8.36.0)(typescript@4.7.4)
+      '@typescript-eslint/parser': 5.56.0(eslint@8.36.0)(typescript@5.2.2)
       eslint: 8.36.0
       eslint-import-resolver-node: 0.3.7
       eslint-import-resolver-typescript: 3.5.3(eslint-plugin-import@2.28.1)(eslint@8.36.0)
@@ -1318,7 +1318,7 @@ packages:
       eslint-plugin-jsx-a11y: 6.7.1(eslint@8.36.0)
       eslint-plugin-react: 7.33.2(eslint@8.36.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.36.0)
-      typescript: 4.7.4
+      typescript: 5.2.2
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
@@ -1375,7 +1375,7 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.56.0(eslint@8.36.0)(typescript@4.7.4)
+      '@typescript-eslint/parser': 5.56.0(eslint@8.36.0)(typescript@5.2.2)
       debug: 3.2.7
       eslint: 8.36.0
       eslint-import-resolver-node: 0.3.7
@@ -1394,7 +1394,7 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.56.0(eslint@8.36.0)(typescript@4.7.4)
+      '@typescript-eslint/parser': 5.56.0(eslint@8.36.0)(typescript@5.2.2)
       array-includes: 3.1.6
       array.prototype.findlastindex: 1.2.3
       array.prototype.flat: 1.3.1
@@ -2859,14 +2859,14 @@ packages:
   /tslib@2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
 
-  /tsutils@3.21.0(typescript@4.7.4):
+  /tsutils@3.21.0(typescript@5.2.2):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.7.4
+      typescript: 5.2.2
     dev: true
 
   /turbo-darwin-64@1.8.5:
@@ -2980,9 +2980,9 @@ packages:
       is-typed-array: 1.1.12
     dev: true
 
-  /typescript@4.7.4:
-    resolution: {integrity: sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==}
-    engines: {node: '>=4.2.0'}
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
+    engines: {node: '>=14.17'}
     hasBin: true
 
   /unbox-primitive@1.0.2:
@@ -3004,7 +3004,7 @@ packages:
     resolution: {integrity: sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==}
     dev: false
 
-  /viem@1.16.4(typescript@4.7.4):
+  /viem@1.16.4(typescript@5.2.2):
     resolution: {integrity: sha512-T9ziN3EERXz0BtQSS2VJM+P1EJ2W7K7PviobFrmvWCEYmNQ/vJDhfFqGjvq0ZL9LVz9HvevCbenEy8oIdMEZ+w==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -3017,9 +3017,9 @@ packages:
       '@noble/hashes': 1.3.2
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
-      abitype: 0.9.8(typescript@4.7.4)
+      abitype: 0.9.8(typescript@5.2.2)
       isows: 1.0.3(ws@8.13.0)
-      typescript: 4.7.4
+      typescript: 5.2.2
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil

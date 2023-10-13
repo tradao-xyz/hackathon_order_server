@@ -1,5 +1,5 @@
 {
-  "name": "crypto",
+  "name": "cryptoexample",
   "repository": "https://github.com/vercel/examples.git",
   "license": "MIT",
   "private": true,
@@ -23,6 +23,6 @@
     "eslint": "^8.36.0",
     "eslint-config-next": "canary",
     "turbo": "^1.8.5",
-    "typescript": "4.7.4"
+    "typescript": "^5.2.2"
   }
 }
