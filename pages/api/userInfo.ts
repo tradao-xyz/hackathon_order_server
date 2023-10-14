@@ -1,5 +1,7 @@
 import type { NextRequest } from "next/server";
 import { projectId } from "../../utils/sessionkey";
+import { selectUserInfo } from "../../utils/user";
+import { sendTelegramResponse } from "../../utils/botLib";
 
 // ------------------
 // Using Crypto with Edge Middleware and Edge Functions
@@ -11,20 +13,27 @@ export const config = {
 
 export default async function getUserInfo(request: NextRequest) {
   const url = request.nextUrl;
-  const fromMiddleware = url.searchParams.get("token") ?? "unset";
+  const tgId = Number(url.searchParams.get("tgId"));
 
-  const plainText = "Hello 3333!";
-
-  return new Response(
-    JSON.stringify({
-      // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID
-      uuid: crypto.randomUUID(),
-      // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
-      randomValues: crypto.getRandomValues(new Uint32Array(10)),
-      plainText,
-      fromMiddleware,
-      projectId,
-    }),
-    { headers: { "Content-Type": "application/json" } }
-  );
+  const userInfo = await selectUserInfo(tgId);
+  if (!userInfo || !userInfo.scw || !userInfo.sessionKey) {
+    //1. generate verificationCode
+    const u32a = new Uint32Array(1);
+    const verificationCode = crypto.getRandomValues(u32a)[0];
+    //2. lead to binding...
+    const msg = `🤖 Hey ${tgId}, click below to get your smart wallet! \n\n\n  [Get new Wallet](https://aa.tradao.xyz/build?tgId=123&publicKey=0x123&verificationCode=abc) `;
+    return await sendTelegramResponse(
+      tgId,
+      msg,
+      process.env.TELEGRAM_BOT_TOKEN
+    );
+  } else {
+    return new Response(
+      JSON.stringify({
+        tgId,
+        userInfo,
+      }),
+      { headers: { "Content-Type": "application/json" } }
+    );
+  }
 }
