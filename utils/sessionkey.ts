@@ -4,12 +4,14 @@ import {
   ECDSAProvider,
   EmptyAccountSigner,
   Operation,
+  ParamCondition,
   SessionKeyProvider,
 } from "@zerodev/sdk";
 import {
   Hex,
   encodeFunctionData,
   getFunctionSelector,
+  pad,
   parseAbi,
   zeroAddress,
 } from "viem";
@@ -20,26 +22,29 @@ import {
 
 export const projectId = "0864346d-c650-4383-830b-35bdfd2fa5be";
 
-const gmxv2ExchangeRouterAddress = "0x7C68C7866A64FA2160F78EEaE12217FFbf871fa8";
+const gmxv1TermsOfService = "0xabbc5f99639c9b6bcb58544ddf04efa6802f4064";
+const gmxv1RouterAddress = "0xb87a436B93fFE9D75c5cFA7bAcFff96430b09868";
+const arbiUsdcAddress = "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8";
 
 // const sessionPublicKey =
 //   "0xc6973b771925cbad96047fc079c3cd83a3fac0890f7532fc81ccc587a2bc955d";
 const sessionPrivateKey: Hex = "0x4ef084DD03A58497Dd549266b51BeE274C3b420F";
 
 const contractABI = parseAbi([
-  "function mint(address _to) public",
-  "function balanceOf(address owner) external view returns (uint256 balance)",
+  "function approvePlugin(address _plugin) external",
 ]);
 
 export async function sendUO(sessionKeyProvider: SessionKeyProvider) {
-  const { hash } = await sessionKeyProvider.sendUserOperation({
-    target: gmxv2ExchangeRouterAddress,
-    data: encodeFunctionData({
-      abi: contractABI,
-      functionName: "mint",
-      args: ["0xabc"],
-    }),
-  });
+  const { hash } = await sessionKeyProvider.sendUserOperation([
+    {
+      target: gmxv1TermsOfService,
+      data: encodeFunctionData({
+        abi: contractABI,
+        functionName: "approvePlugin",
+        args: [gmxv1RouterAddress],
+      }),
+    },
+  ]);
 
   await sessionKeyProvider.waitForUserOperationTransaction(hash as Hex);
 }
@@ -91,12 +96,59 @@ async function buildSerializedSessionKeyParams(sessionPublicKey: Hex) {
       permissions: [
         {
           // Target contract to interact with
-          target: gmxv2ExchangeRouterAddress,
+          target: gmxv1TermsOfService,
+          // Maximum value that can be transferred.  In this case we
+          // set it to zero so that no value transfer is possible.
+          valueLimit: 0n,
+          // The function (as specified with a selector) that can be called on
+          sig: getFunctionSelector("approvePlugin(address _plugin) external"), //todo
+          // Whether you'd like to call this function via CALL or DELEGATECALL.
+          // DELEGATECALL is dangerous -- don't use it unless you know what you
+          // are doing.
+          operation: Operation.Call,
+          // Each "rule" is a condition on a parameter.  In this case, we only
+          // allow for minting NFTs to our own account.
+          rules: [],
+        },
+        {
+          // Target contract to interact with
+          target: arbiUsdcAddress,
+          // Maximum value that can be transferred.  In this case we
+          // set it to zero so that no value transfer is possible.
+          valueLimit: 0n,
+          // The function (as specified with a selector) that can be called on
+          sig: getFunctionSelector("approve(address spender, uint256 amount)"), //todo
+          // Whether you'd like to call this function via CALL or DELEGATECALL.
+          // DELEGATECALL is dangerous -- don't use it unless you know what you
+          // are doing.
+          operation: Operation.Call,
+          // Each "rule" is a condition on a parameter.  In this case, we only
+          // allow for minting NFTs to our own account.
+          rules: [
+            {
+              // The condition in this case is "EQUAL"
+              condition: ParamCondition.EQUAL,
+              // The offset of the parameter is 0 since it's the first parameter.
+              // We will simplify this later.
+              offset: 0,
+              // We pad the address to be the correct size.
+              // We will simplify this later.
+              param: pad("0xb87a436B93fFE9D75c5cFA7bAcFff96430b09868", {
+                size: 32,
+              }),
+            },
+          ],
+        },
+        {
+          // Target contract to interact with
+          target: gmxv1RouterAddress,
           // Maximum value that can be transferred.  In this case we
           // set it to zero so that no value transfer is possible.
           valueLimit: 1000000000000000000n,
           // The function (as specified with a selector) that can be called on
-          sig: getFunctionSelector("createOrder() payable returns (bytes32)"), //todo
+          sig: getFunctionSelector(
+            "createIncreasePosition(address[] _path,address _indexToken,uint256 _amountIn,uint256 _minOut,uint256 _sizeDelta,bool _isLong,uint256 _acceptablePrice,uint256 _executionFee,bytes32 _referralCode,address _callbackTarget)"
+          ), //todo
           // Whether you'd like to call this function via CALL or DELEGATECALL.
           // DELEGATECALL is dangerous -- don't use it unless you know what you
           // are doing.

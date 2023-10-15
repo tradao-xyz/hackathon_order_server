@@ -12,6 +12,8 @@ export const config = {
 
 export default async function binding(request: NextRequest) {
   const url = request.nextUrl;
+  const b = request.json();
+  //todo post
   const tgId = Number(url.searchParams.get("tgId"));
   const scw = url.searchParams.get("scw");
   const serializeSessionKeyParams = url.searchParams.get(
