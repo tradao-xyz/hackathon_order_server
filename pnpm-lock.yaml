@@ -11,8 +11,8 @@ dependencies:
     specifier: ^4.0.30
     version: 4.0.30(typescript@5.0.4)
   grammy:
-    specifier: ^1.19.2
-    version: 1.19.2
+    specifier: ~1.13.1
+    version: 1.13.1
   next:
     specifier: canary
     version: 13.5.5-canary.16(react-dom@18.2.0)(react@18.2.0)
@@ -460,8 +460,8 @@ packages:
       '@ethersproject/strings': 5.7.0
     dev: false
 
-  /@grammyjs/types@3.3.0:
-    resolution: {integrity: sha512-18Qb12jXiIptqZAlboJMvFxNxydLskUjvE5PbU8ergKQlNIr8jRvYoHDm4t/x3qEfpf+FNhGw23lyZfgEE6e/g==}
+  /@grammyjs/types@2.12.1:
+    resolution: {integrity: sha512-1hO6esfdo42mSvyArPHrlgSY/fgerTuVNAbSD5ZKHS/w5ZyrkA4pRp3VHK2XE3fm9/uMBT/39i8pPvx0+Kbxjg==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.11:
@@ -1793,11 +1793,11 @@ packages:
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  /grammy@1.19.2:
-    resolution: {integrity: sha512-bvDWesJgLn65MOsWhShVTVG1bSnh6Yo3OtUwoFzTG21CdPt6r8nzPWcuBSzxMDUQyv8I1c0TXH7zIxXFxiH4sw==}
+  /grammy@1.13.1:
+    resolution: {integrity: sha512-kAxja6QDjw5oTJOFtrqhaQlLfCco3AwO4Mb4YRdP8A+v59roJA8mgEd0S5dOgFPyn74bPp8VWaKCI+of8wnPow==}
     engines: {node: ^12.20.0 || >=14.13.1}
     dependencies:
-      '@grammyjs/types': 3.3.0
+      '@grammyjs/types': 2.12.1
       abort-controller: 3.0.0
       debug: 4.3.4
       node-fetch: 2.7.0

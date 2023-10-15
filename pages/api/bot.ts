@@ -2,14 +2,15 @@ import { Bot, webhookCallback } from "grammy";
 import { NextApiRequest, NextApiResponse } from "next";
 import functions from "../../src/functions";
 
-export const config = {
-  runtime: "edge",
-};
+// export const config = {
+//   runtime: "edge",
+// };
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log(`11111`);
   // Initialize a bot instance
   const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || "");
   console.log("Initialized instance successfully");
