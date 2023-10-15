@@ -10,16 +10,21 @@ export const config = {
   runtime: "edge",
 };
 
+interface BindingParams {
+  tgId: number;
+  scw: string;
+  serializeSessionKeyParams: string;
+  verificationCode: string;
+}
+
 export default async function binding(request: NextRequest) {
   const url = request.nextUrl;
-  const b = request.json();
+  const b: BindingParams = await request.json();
   //todo post
-  const tgId = Number(url.searchParams.get("tgId"));
-  const scw = url.searchParams.get("scw");
-  const serializeSessionKeyParams = url.searchParams.get(
-    "serializeSessionKeyParams"
-  );
-  const verificationCode = url.searchParams.get("verificationCode");
+  const tgId = b.tgId;
+  const scw = b.scw;
+  const serializeSessionKeyParams = b.serializeSessionKeyParams;
+  const verificationCode = b.verificationCode;
 
   if (serializeSessionKeyParams.length < 10) {
     return new Response(

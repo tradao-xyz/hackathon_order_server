@@ -1,16 +1,18 @@
 import { Bot } from "grammy";
 import error from "./error";
-import { session } from "./session";
 import walletInfo from "./walletInfo";
 import newOrder from "./newOrder";
 import orderInfo from "./orderInfo";
+import session from "./session";
 
 const functions = async (bot: Bot) => {
-  await bot.use(session);
-  await bot.use(walletInfo);
-  await bot.use(newOrder);
-  await bot.use(orderInfo);
-  await bot.use(error);
+  console.log(`ff 111`);
+  bot.use(session);
+  bot.use(walletInfo);
+  bot.use(newOrder);
+  bot.use(orderInfo);
+  bot.use(error);
+  console.log(`ff 222`);
 };
 
 export default functions;
