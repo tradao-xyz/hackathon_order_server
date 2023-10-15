@@ -10,7 +10,9 @@ export async function session(
   next: NextFunction // is an alias for: () => Promise<void>
 ): Promise<void> {
   const tgId = ctx.msg.chat.id;
+  console.log(`session 111: ${tgId}`);
   const userInfo = await selectUserInfo(tgId);
+  console.log(`session 222: ${userInfo}`);
 
   if (!userInfo || !userInfo.scw || !userInfo.sessionKey) {
     //1. generate verificationCode
@@ -22,10 +24,12 @@ export async function session(
       "New wallet",
       `https://aa.tradao.xyz/build?tgId=${tgId}&sessionPublicKey=${sessionPublicKey}&verificationCode=${verificationCode}`
     );
-    await ctx.reply(msg, {
+    console.log(`session 333: ${msg}`);
+    const r = await ctx.reply(msg, {
       parse_mode: "MarkdownV2",
       reply_markup: keyboard,
     });
+    console.log(`session 444: ${r}`);
   } else {
     await next();
   }
