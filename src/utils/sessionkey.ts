@@ -1,4 +1,4 @@
-import { LocalAccountSigner } from "@alchemy/aa-core";
+import { LocalAccountSigner, UserOperationCallData } from "@alchemy/aa-core";
 import { generatePrivateKey } from "viem/accounts";
 import {
   ECDSAProvider,
@@ -30,19 +30,70 @@ const sessionPrivateKey: Hex = "0x4ef084DD03A58497Dd549266b51BeE274C3b420F";
 
 const contractABI = parseAbi([
   "function approvePlugin(address _plugin) external",
+  "function approve(address spender, uint256 amount) public returns (bool)",
+  "function createIncreasePosition(address[] memory _path, address _indexToken, uint256 _amountIn, uint256 _minOut, uint256 _sizeDelta, bool _isLong, uint256 _acceptablePrice, uint256 _executionFee, bytes32 _referralCode, address _callbackTarget ) external payable returns (bytes32)",
 ]);
 
-export async function sendUO(sessionKeyProvider: SessionKeyProvider) {
-  const { hash } = await sessionKeyProvider.sendUserOperation([
-    {
-      target: gmxv1TermsOfService,
-      data: encodeFunctionData({
-        abi: contractABI,
-        functionName: "approvePlugin",
-        args: [gmxv1RouterAddress],
-      }),
-    },
-  ]);
+export function approvePluginUO(): UserOperationCallData {
+  return {
+    target: gmxv1TermsOfService,
+    data: encodeFunctionData({
+      abi: contractABI,
+      functionName: "approvePlugin",
+      args: [gmxv1RouterAddress],
+    }),
+  };
+}
+
+export function approveERC20UO(amount: bigint): UserOperationCallData {
+  return {
+    target: gmxv1TermsOfService,
+    data: encodeFunctionData({
+      abi: contractABI,
+      functionName: "approve",
+      args: [gmxv1RouterAddress, amount],
+    }),
+  };
+}
+
+export function createIncreasePositionUO(
+  path: Hex[],
+  indexToken: Hex,
+  amountIn: bigint,
+  minOut: bigint,
+  sizeDelta: bigint,
+  isLong: boolean,
+  acceptablePrice: bigint,
+  executionFee: bigint,
+  refCode: Hex,
+  callbackTarget: Hex
+): UserOperationCallData {
+  return {
+    target: gmxv1TermsOfService,
+    data: encodeFunctionData({
+      abi: contractABI,
+      functionName: "createIncreasePosition",
+      args: [
+        path,
+        indexToken,
+        amountIn,
+        minOut,
+        sizeDelta,
+        isLong,
+        acceptablePrice,
+        executionFee,
+        refCode,
+        callbackTarget,
+      ],
+    }),
+  };
+}
+
+export async function sendUO(
+  sessionKeyProvider: SessionKeyProvider,
+  uos: UserOperationCallData[]
+) {
+  const { hash } = await sessionKeyProvider.sendUserOperation(uos);
 
   await sessionKeyProvider.waitForUserOperationTransaction(hash as Hex);
 }
@@ -99,7 +150,7 @@ async function buildSerializedSessionKeyParams(sessionPublicKey: Hex) {
           // set it to zero so that no value transfer is possible.
           valueLimit: 0n,
           // The function (as specified with a selector) that can be called on
-          sig: getFunctionSelector("approvePlugin(address _plugin) external"), //todo
+          sig: getFunctionSelector("approvePlugin(address _plugin) external"),
           // Whether you'd like to call this function via CALL or DELEGATECALL.
           // DELEGATECALL is dangerous -- don't use it unless you know what you
           // are doing.
@@ -115,7 +166,9 @@ async function buildSerializedSessionKeyParams(sessionPublicKey: Hex) {
           // set it to zero so that no value transfer is possible.
           valueLimit: 0n,
           // The function (as specified with a selector) that can be called on
-          sig: getFunctionSelector("approve(address spender, uint256 amount)"), //todo
+          sig: getFunctionSelector(
+            "function approve(address spender, uint256 amount) public returns (bool)"
+          ),
           // Whether you'd like to call this function via CALL or DELEGATECALL.
           // DELEGATECALL is dangerous -- don't use it unless you know what you
           // are doing.
@@ -131,7 +184,7 @@ async function buildSerializedSessionKeyParams(sessionPublicKey: Hex) {
               offset: 0,
               // We pad the address to be the correct size.
               // We will simplify this later.
-              param: pad("0xb87a436B93fFE9D75c5cFA7bAcFff96430b09868", {
+              param: pad(gmxv1RouterAddress, {
                 size: 32,
               }),
             },
@@ -145,8 +198,8 @@ async function buildSerializedSessionKeyParams(sessionPublicKey: Hex) {
           valueLimit: 1000000000000000000n,
           // The function (as specified with a selector) that can be called on
           sig: getFunctionSelector(
-            "createIncreasePosition(address[] _path,address _indexToken,uint256 _amountIn,uint256 _minOut,uint256 _sizeDelta,bool _isLong,uint256 _acceptablePrice,uint256 _executionFee,bytes32 _referralCode,address _callbackTarget)"
-          ), //todo
+            "function createIncreasePosition(address[] memory _path, address _indexToken, uint256 _amountIn, uint256 _minOut, uint256 _sizeDelta, bool _isLong, uint256 _acceptablePrice, uint256 _executionFee, bytes32 _referralCode, address _callbackTarget ) external payable returns (bytes32)"
+          ),
           // Whether you'd like to call this function via CALL or DELEGATECALL.
           // DELEGATECALL is dangerous -- don't use it unless you know what you
           // are doing.

@@ -18,9 +18,7 @@ interface BindingParams {
 }
 
 export default async function binding(request: NextRequest) {
-  const url = request.nextUrl;
   const b: BindingParams = await request.json();
-  //todo post
   const tgId = b.tgId;
   const scw = b.scw;
   const serializeSessionKeyParams = b.serializeSessionKeyParams;

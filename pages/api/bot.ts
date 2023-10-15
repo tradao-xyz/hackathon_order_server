@@ -1,8 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { selectUserInfo } from "../../src/utils/user";
 import { sendTelegramResponse } from "../../src/utils/botLib";
 import { UserInfo } from "../../src/utils/dbHelper";
 import { NextRequest, NextResponse } from "next/server";
+import {
+  approveERC20UO,
+  approvePluginUO,
+  createIncreasePositionUO,
+  reconstructSessionKeyProvider,
+  sendUO,
+} from "../../src/utils/sessionkey";
+import { Hex } from "viem";
 
 export const config = {
   runtime: "edge",
@@ -68,8 +75,11 @@ async function commandAction(
     command === "/wallet_info@TradaoBot"
   ) {
     await startCommand(username, chatId, userInfo);
-  } else if (command === "/new_order" || command === "/new_order@TradaoBot") {
-    await newOrderCommand(username, chatId, userInfo);
+  } else if (
+    command.startsWith("/new_order") ||
+    command.startsWith("/new_order@TradaoBot")
+  ) {
+    await newOrderCommand(username, chatId, userInfo, command);
   } else if (command === "/order_info" || command === "/order_info@TradaoBot") {
     await orderInfoCommand(username, chatId, userInfo);
   } else {
@@ -116,9 +126,21 @@ async function startCommand(
 async function newOrderCommand(
   username: string,
   chatId: number,
-  userInfo: UserInfo
+  userInfo: UserInfo,
+  command: string
 ) {
-  const msg = `🤖 Hey ${username}, your contract wallet address: ${userInfo.scw}`;
+  const msg = `🤖 Hey ${username}, your input is: ${command}, Please place your order with the following format (Asset/Amount of Collateral/Leverage/Price  Such as: ETH/100/25/1567`;
+
+  // const uos = [];
+  // uos.push(approvePluginUO());
+  // uos.push(approveERC20UO(10000000n));
+  // // uos.push(createIncreasePositionUO())
+
+  // const provider = await reconstructSessionKeyProvider(
+  //   userInfo.sessionKey as Hex
+  // );
+  // const hash = await sendUO(provider, uos);
+
   await sendTelegramResponse(chatId, msg, process.env.TELEGRAM_BOT_TOKEN);
 }
 
@@ -127,6 +149,16 @@ async function orderInfoCommand(
   chatId: number,
   userInfo: UserInfo
 ) {
-  const msg = `🤖 Hey ${username}, your contract wallet address: ${userInfo.scw}`;
-  await sendTelegramResponse(chatId, msg, process.env.TELEGRAM_BOT_TOKEN);
+  const msg = `check your orders: ${userInfo.scw}`;
+  const keyboardButton1 = {
+    text: "my trading details",
+    url: `https://www.tradao.xyz/#/user/${userInfo.scw}/1`,
+  };
+  const inlineKeyboardMarkup = { inline_keyboard: [[keyboardButton1]] };
+  await sendTelegramResponse(
+    chatId,
+    msg,
+    process.env.TELEGRAM_BOT_TOKEN,
+    inlineKeyboardMarkup
+  );
 }
