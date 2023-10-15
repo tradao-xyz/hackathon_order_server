@@ -11,7 +11,11 @@ export default async function handler(
   console.log("Initialized instance successfully");
 
   // Append all middlewares to bot
-  await functions(bot);
+  // await functions(bot);
+  bot.on("message", (ctx) => {
+    console.log(`111111111111`);
+    ctx.reply("Got another message!");
+  });
   console.log("Appended functions successfully");
 
   // Create a request handler
