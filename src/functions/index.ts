@@ -3,7 +3,7 @@ import error from "./error";
 import walletInfo from "./walletInfo";
 import newOrder from "./newOrder";
 import orderInfo from "./orderInfo";
-import session from "./session";
+import { session } from "./session";
 
 const functions = async (bot: Bot) => {
   console.log(`ff 111`);

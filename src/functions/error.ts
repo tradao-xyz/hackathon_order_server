@@ -13,6 +13,7 @@ export const keyboard = new InlineKeyboard().text(
 );
 
 composer.on("message", async (ctx: Context): Promise<void> => {
+  console.log(`eeeeeee 99999`);
   if (ctx.message?.chat.type === "private") {
     await ctx.reply(message, { parse_mode: "HTML", reply_markup: keyboard });
   }
