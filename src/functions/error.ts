@@ -5,11 +5,11 @@ const composer = new Composer();
 export const message =
   `<b>⚠️ Oh, I didn't get it...</b>` +
   `\n` +
-  `Maybe you'll take a look at my available commands at /help?!`;
+  `Maybe you'll take a look at other available commands?`;
 
 export const keyboard = new InlineKeyboard().text(
-  "> Go to available commands! <",
-  "help"
+  "> wallet_info <",
+  "wallet_info"
 );
 
 composer.on("message", async (ctx: Context): Promise<void> => {

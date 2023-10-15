@@ -2,10 +2,6 @@ import { Bot, webhookCallback } from "grammy";
 import { NextApiRequest, NextApiResponse } from "next";
 import functions from "../../src/functions";
 
-// export const config = {
-//   runtime: "edge",
-// };
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

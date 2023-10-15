@@ -13,7 +13,7 @@
     "@alchemy/aa-core": "^0.1.0",
     "@planetscale/database": "^1.11.0",
     "@zerodev/sdk": "^4.0.30",
-    "grammy": "~1.13.1",
+    "grammy": "^1.19.2",
     "next": "canary",
     "react": "latest",
     "react-dom": "latest",
