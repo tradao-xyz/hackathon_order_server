@@ -1,10 +1,6 @@
 import { Bot, webhookCallback } from "grammy";
 import { NextApiRequest, NextApiResponse } from "next";
-import functions from "../functions";
-
-// ------------------
-// Using Crypto with Edge Middleware and Edge Functions
-// ------------------
+import functions from "../../src/functions";
 
 export const config = {
   runtime: "edge",

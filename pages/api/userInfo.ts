@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
-import { projectId } from "../../utils/sessionkey";
-import { selectUserInfo } from "../../utils/user";
-import { sendTelegramResponse } from "../../utils/botLib";
+import { projectId } from "../../src/utils/sessionkey";
+import { selectUserInfo } from "../../src/utils/user";
+import { sendTelegramResponse } from "../../src/utils/botLib";
 
 // ------------------
 // Using Crypto with Edge Middleware and Edge Functions

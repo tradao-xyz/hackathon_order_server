@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { insertBinding } from "../../utils/dbHelper";
+import { insertBinding } from "../../src/utils/dbHelper";
 import { getAddress } from "viem";
 
 // ------------------
