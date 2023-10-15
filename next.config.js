@@ -12,7 +12,7 @@ module.exports = {
           },
           {
             key: "Access-Control-Allow-Methods",
-            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            value: "*",
           },
           { key: "Access-Control-Allow-Headers", value: "*" },
           { key: "Access-Control-Allow-Credentials", value: "true" },

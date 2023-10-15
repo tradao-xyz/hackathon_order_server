@@ -6,6 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log(`0000: ${JSON.stringify(req.body)}`);
   // Initialize a bot instance
   const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || "");
   console.log("Initialized instance successfully");
