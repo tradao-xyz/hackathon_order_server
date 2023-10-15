@@ -1,23 +1,19 @@
-import type { NextRequest } from "next/server";
+import type { NextRequest, NextResponse } from "next/server";
 import { insertBinding } from "../../src/utils/dbHelper";
 import { getAddress } from "viem";
-
-// ------------------
-// Using Crypto with Edge Middleware and Edge Functions
-// ------------------
 
 export const config = {
   runtime: "edge",
 };
 
-interface BindingParams {
-  tgId: number;
-  scw: string;
-  serializeSessionKeyParams: string;
-  verificationCode: string;
-}
+export default async function handler(request: NextRequest, res: NextResponse) {
+  interface BindingParams {
+    tgId: number;
+    scw: string;
+    serializeSessionKeyParams: string;
+    verificationCode: string;
+  }
 
-export default async function binding(request: NextRequest) {
   const b: BindingParams = await request.json();
   const tgId = b.tgId;
   const scw = b.scw;
