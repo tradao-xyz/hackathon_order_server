@@ -11,7 +11,7 @@ dependencies:
     specifier: ^4.0.30
     version: 4.0.30(typescript@5.0.4)
   grammy:
-    specifier: ~1.19.2
+    specifier: ^1.19.2
     version: 1.19.2
   next:
     specifier: canary

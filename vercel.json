@@ -1,6 +1,5 @@
 {
-  "buildCommand": "pnpm turbo build",
-  "ignoreCommand": "pnpm dlx turbo-ignore",
+  "buildCommand": "pnpm next build",
   "functions": {
     "pages/api/bot.ts": {
       "memory": 1024,

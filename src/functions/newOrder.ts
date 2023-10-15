@@ -3,6 +3,7 @@ import { Composer, Context } from "grammy";
 const composer = new Composer();
 
 composer.command("new_order", async (ctx: Context): Promise<void> => {
+  console.log(`msg: ${ctx.msg.text}`);
   const message = ``;
   await ctx.reply(message, {
     parse_mode: "HTML",
