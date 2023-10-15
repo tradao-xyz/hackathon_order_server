@@ -1,4 +1,10 @@
 {
   "buildCommand": "pnpm turbo build",
-  "ignoreCommand": "pnpm dlx turbo-ignore"
+  "ignoreCommand": "pnpm dlx turbo-ignore",
+  "functions": {
+    "pages/api/bot.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 }
