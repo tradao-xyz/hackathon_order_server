@@ -100,7 +100,7 @@ async function session(tgId: number) {
     const msg = `🤖 Hello, click below to get your smart wallet!`;
     const keyboardButton1 = {
       text: "New wallet",
-      url: `https://aa.tradao.xyz/build?tgId=${tgId}&sessionPublicKey=${sessionPublicKey}&verificationCode=${verificationCode}`,
+      url: `https://aa.tradao.xyz/build/#/${tgId}/${sessionPublicKey}/${verificationCode}`,
     };
     const inlineKeyboardMarkup = { inline_keyboard: [[keyboardButton1]] };
     await sendTelegramResponse(
@@ -129,17 +129,17 @@ async function newOrderCommand(
   userInfo: UserInfo,
   command: string
 ) {
+  const uos = [];
+  uos.push(approvePluginUO());
+  uos.push(approveERC20UO(10000000n));
+  // uos.push(createIncreasePositionUO())
+
+  const provider = await reconstructSessionKeyProvider(
+    userInfo.sessionKey as Hex
+  );
+  const hash = await sendUO(provider, uos);
+
   const msg = `🤖 Hey ${username}, your input is: ${command}, Please place your order with the following format (Asset/Amount of Collateral/Leverage/Price  Such as: ETH/100/25/1567`;
-
-  // const uos = [];
-  // uos.push(approvePluginUO());
-  // uos.push(approveERC20UO(10000000n));
-  // // uos.push(createIncreasePositionUO())
-
-  // const provider = await reconstructSessionKeyProvider(
-  //   userInfo.sessionKey as Hex
-  // );
-  // const hash = await sendUO(provider, uos);
 
   await sendTelegramResponse(chatId, msg, process.env.TELEGRAM_BOT_TOKEN);
 }
