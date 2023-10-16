@@ -52,7 +52,7 @@ export function approvePluginUO(): UserOperationCallData {
 
 export function approveERC20UO(amount: bigint): UserOperationCallData {
   return {
-    target: gmxv1TermsOfService,
+    target: arbiUsdcAddress,
     data: encodeFunctionData({
       abi: contractABI,
       functionName: "approve",
