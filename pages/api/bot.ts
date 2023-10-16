@@ -133,7 +133,7 @@ async function newOrderCommand(
   let msg: string;
   const helpMsg = `🤖 Hey ${username}, your input is: ${
     splitedCommands[1] ?? "empty"
-  }, Please place your order with the following format (Asset/Amount of Collateral/Side/Leverage/Price  Such as: ETH/Long/100/25/1567`;
+  }, Please place your order with the following format (Asset/Side/Collateral/Leverage/Price  Such as: ETH/Long/100/25/1567`;
   if (splitedCommands.length < 2) {
     msg = helpMsg;
   } else {
