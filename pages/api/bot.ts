@@ -129,15 +129,15 @@ async function newOrderCommand(
   userInfo: UserInfo,
   command: string
 ) {
-  const uos = [];
-  uos.push(approvePluginUO());
-  uos.push(approveERC20UO(10000000n));
-  // uos.push(createIncreasePositionUO())
+  // const uos = [];
+  // uos.push(approvePluginUO());
+  // uos.push(approveERC20UO(10000000n));
+  // // uos.push(createIncreasePositionUO())
 
-  const provider = await reconstructSessionKeyProvider(
-    userInfo.sessionKey as Hex
-  );
-  const hash = await sendUO(provider, uos);
+  // const provider = await reconstructSessionKeyProvider(
+  //   userInfo.sessionKey as Hex
+  // );
+  // const hash = await sendUO(provider, uos);
 
   const msg = `🤖 Hey ${username}, your input is: ${command}, Please place your order with the following format (Asset/Amount of Collateral/Leverage/Price  Such as: ETH/100/25/1567`;
 
