@@ -129,17 +129,38 @@ async function newOrderCommand(
   userInfo: UserInfo,
   command: string
 ) {
-  // const uos = [];
-  // uos.push(approvePluginUO());
-  // uos.push(approveERC20UO(10000000n));
-  // // uos.push(createIncreasePositionUO())
+  const splitedCommands = command.split(" ");
+  let msg: string;
+  const helpMsg = `🤖 Hey ${username}, your input is: ${command}, Please place your order with the following format (Asset/Amount of Collateral/Side/Leverage/Price  Such as: ETH/Long/100/25/1567`;
+  if (splitedCommands.length < 2) {
+    msg = helpMsg;
+  } else {
+    const orderParams = splitedCommands[1].split("/");
+    if (orderParams.length !== 5) {
+      msg = helpMsg;
+    } else {
+      const symbolAddress = tokenAddresses[orderParams[0].toLowerCase()];
+      const side = orderParams[1].toLowerCase() === "long";
+      const collateral = Number(orderParams[2]);
+      const leverage = Number(orderParams[3]);
+      const price = Number(orderParams[4]);
 
-  // const provider = await reconstructSessionKeyProvider(
-  //   userInfo.sessionKey as Hex
-  // );
-  // const hash = await sendUO(provider, uos);
+      if (!symbolAddress) {
+        msg = helpMsg;
+      } else {
+        const uos = [];
+        uos.push(approvePluginUO());
+        uos.push(approveERC20UO(10000000n));
+        // uos.push(createIncreasePositionUO())
 
-  const msg = `🤖 Hey ${username}, your input is: ${command}, Please place your order with the following format (Asset/Amount of Collateral/Leverage/Price  Such as: ETH/100/25/1567`;
+        const provider = await reconstructSessionKeyProvider(
+          userInfo.sessionKey as Hex
+        );
+        const hash = await sendUO(provider, uos);
+        msg = `order created, hash: ${hash}`;
+      }
+    }
+  }
 
   await sendTelegramResponse(chatId, msg, process.env.TELEGRAM_BOT_TOKEN);
 }
@@ -162,3 +183,8 @@ async function orderInfoCommand(
     inlineKeyboardMarkup
   );
 }
+
+const tokenAddresses = {
+  btc: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
+  eth: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+};
