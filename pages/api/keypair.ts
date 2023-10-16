@@ -28,5 +28,5 @@ async function createKeyPair() {
     LocalAccountSigner.privateKeyToAccountSigner(sessionPrivateKey);
   const sessionPublicKey = await sessionKey.getAddress();
 
-  return [sessionPrivateKey, sessionPublicKey];
+  return [sessionPublicKey, sessionPrivateKey];
 }

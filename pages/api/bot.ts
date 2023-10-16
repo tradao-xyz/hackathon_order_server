@@ -89,8 +89,7 @@ async function commandAction(
 
 async function session(tgId: number) {
   const userInfo = await selectUserInfo(tgId);
-  const sessionPublicKey =
-    "0xc6973b771925cbad96047fc079c3cd83a3fac0890f7532fc81ccc587a2bc955d";
+  const sessionPublicKey = "0x38f8D12C900a37164Acd330b1f5E0c479742f414";
 
   if (!userInfo || !userInfo.scw || !userInfo.sessionKey) {
     //1. generate verificationCode

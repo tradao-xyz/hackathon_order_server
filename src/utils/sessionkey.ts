@@ -26,7 +26,12 @@ const gmxv1TermsOfService = "0xabbc5f99639c9b6bcb58544ddf04efa6802f4064";
 const gmxv1RouterAddress = "0xb87a436B93fFE9D75c5cFA7bAcFff96430b09868";
 const arbiUsdcAddress = "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8";
 
-const sessionPrivateKey: Hex = "0x4ef084DD03A58497Dd549266b51BeE274C3b420F";
+// const sessionPrivateKey = fromHex(
+//   "0x4ef084DD03A58497Dd549266b51BeE274C3b420F",
+//   "bigint"
+// );
+const sessionPrivateKey =
+  "0xc1e2b2e1181a279fa12bfc100c4ea758457e0f9b6a20a8f18d9499c5fbd7d72f" as Hex;
 
 const contractABI = parseAbi([
   "function approvePlugin(address _plugin) external",
