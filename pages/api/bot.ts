@@ -1,7 +1,6 @@
 import { selectUserInfo } from "../../src/utils/user";
 import { sendTelegramResponse } from "../../src/utils/botLib";
 import { UserInfo } from "../../src/utils/dbHelper";
-import { NextRequest, NextResponse } from "next/server";
 import {
   approveERC20UO,
   approvePluginUO,
@@ -10,22 +9,32 @@ import {
   sendUO,
 } from "../../src/utils/sessionkey";
 import { Hex } from "viem";
+import { NextApiRequest, NextApiResponse } from "next";
 
 // export const config = {
 //   runtime: "edge",
 // };
 
-export default async function handler(request: NextRequest, res: NextResponse) {
+let res: NextApiResponse;
+
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  res = response;
   const { method, headers } = request;
 
   if (method === "POST") {
-    return handleRequest(request);
+    await handleRequest(request);
+    res.status(200).json({ ok: true });
+  } else {
+    res.status(404).json({ message: "NotFound" });
   }
-  return new Response("NotFound", { status: 404 });
+  // return new Response("NotFound", { status: 404 });
 }
 
-async function handleRequest(request: NextRequest) {
-  const data = await request.json();
+async function handleRequest(request: NextApiRequest) {
+  const data = await request.body;
 
   console.log(`data--- ${JSON.stringify(data)}`);
 
