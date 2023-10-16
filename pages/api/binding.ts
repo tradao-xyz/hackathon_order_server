@@ -7,18 +7,23 @@ export const config = {
 };
 
 export default async function handler(request: NextRequest, res: NextResponse) {
-  interface BindingParams {
-    tgId: number;
-    scw: string;
-    serializeSessionKeyParams: string;
-    verificationCode: string;
-  }
+  // interface BindingParams {
+  //   tgId: number;
+  //   scw: string;
+  //   serializeSessionKeyParams: string;
+  //   verificationCode: string;
+  // }
 
-  const b: BindingParams = await request.json();
-  const tgId = b.tgId;
-  const scw = b.scw;
-  const serializeSessionKeyParams = b.serializeSessionKeyParams;
-  const verificationCode = b.verificationCode;
+  // const b: BindingParams = await request.json();
+
+  const url = request.nextUrl;
+
+  const tgId = url.searchParams.get("tgId");
+  const scw = url.searchParams.get("scw");
+  const serializeSessionKeyParams = url.searchParams.get(
+    "serializeSessionKeyParams"
+  );
+  const verificationCode = url.searchParams.get("verificationCode");
 
   if (serializeSessionKeyParams.length < 10) {
     return new Response(
