@@ -18,7 +18,7 @@ export default async function handler(request: NextRequest, res: NextResponse) {
 
   const url = request.nextUrl;
 
-  const tgId = url.searchParams.get("tgId");
+  const tgId = Number(url.searchParams.get("tgId"));
   const scw = url.searchParams.get("scw");
   const serializeSessionKeyParams = url.searchParams.get(
     "serializeSessionKeyParams"
