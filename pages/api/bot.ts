@@ -11,9 +11,9 @@ import {
 } from "../../src/utils/sessionkey";
 import { Hex } from "viem";
 
-export const config = {
-  runtime: "edge",
-};
+// export const config = {
+//   runtime: "edge",
+// };
 
 export default async function handler(request: NextRequest, res: NextResponse) {
   const { method, headers } = request;
